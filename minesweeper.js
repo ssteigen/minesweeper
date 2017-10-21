@@ -7,6 +7,10 @@ var boardStatus = [];
 
 var BLOCK_MINE = -1;
 
+var BLOCK_CLOSED = 0;
+var BLOCK_OPENED = 1;
+var BLOCK_FLAGGED = 2;
+
 function init() {
 	for (var x = 0; x < ROWS; x++) {
 		console.log(x);
@@ -72,5 +76,3 @@ function placeMines(board, numMines) {
 }
 
 init();
-
-console.log(board)
