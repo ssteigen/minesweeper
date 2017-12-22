@@ -11,9 +11,10 @@ var BLOCK_CLOSED = 0;
 var BLOCK_OPENED = 1;
 var BLOCK_FLAGGED = 2;
 
+var playing = true;
+
 function init() {
 	for (var x = 0; x < ROWS; x++) {
-		console.log(x);
 		board[x] = [];
 
 		for (var y = 0; y < COLS; y++) {
@@ -36,22 +37,38 @@ function init() {
 
 function countAdjacentMines(x, y) {
 	var mineCount = 0;
+
+  for (var i = x - 1; i <= x + 1; i++) {
+    for (var j = y - 1; j <= y + 1; j++) {
+          
+          if (inBounds(i, j)) {
+              
+        //console.log('i:' + i + ' j:' + j + ' type:' + board[i][j]);
+            if (board[i][j] == BLOCK_MINE) {
+              mineCount++;
+            }
+          }
+    }
+  }
+
+	//for (var dx = -1; dx <= 1; dx++) {
+	//	for (var dy = -1; dy <= 1; dy++) {
+	//		if (dx !== 0 && dy !== 0) {
+	//			var xx = x + dx;
+	//			var yy = y + dy;
+	//			
+	//			if (inBounds(xx, yy)) {
+   //       //console.log('x: ' + xx + ' y: ' + yy + ' state: ' + board[xx][yy]);
+	//				if (board[xx][yy] === BLOCK_MINE) {
+	//					mineCount++;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 	
-	for (var dx = -1; dx <= 1; dx++) {
-		for (var dy = -1; dy <= 1; dy++) {
-			if (dx !== 0 && dy !== 0) {
-				var xx = x + dx;
-				var yy = y + dy;
-				
-				if (inBounds(xx, yy)) {
-					if (board[xx][yy] === BLOCK_MINE) {
-						mineCount++;
-					}
-				}
-			}
-		}
-	}
-	
+    //console.log(mineCount);
+
 	return mineCount;
 }
 
@@ -73,6 +90,19 @@ function placeMines(board, numMines) {
 	}
 
 	return board;
+}
+
+function openBlock(x, y) {
+    if (!playing) {
+        return;
+    }
+
+    if (board[x][y] == BLOCK_MINE) {
+        alert('Game over!');
+        playing = false;
+        // revealBoard();
+    }
+    boardStatus[x][y] = BLOCK_OPENED;
 }
 
 init();

@@ -7,12 +7,19 @@ var blockHeight = H / ROWS;
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-function render() {
-	for (var x = 0; x < ROWS; x++) {
-		for (var y = 0; y < COLS; y++) {
-			renderBlock(x, y);
-		}
+
+function modelToView(x, y) {
+	return {
+		x: x * blockWidth,
+		y: y * blockHeight
 	}
+}
+
+function viewToModel(x, y) {
+    return {
+        x: Math.floor(x / blockWidth),
+        y: Math.floor(y / blockHeight)
+    };
 }
 
 function renderBlock(x, y) {
@@ -27,15 +34,22 @@ function renderBlock(x, y) {
 		ctx.font = '48px serif';
 		ctx.fillStyle = ('black');
 		ctx.strokeStyle = ('black');
-		ctx.fillText('X', viewCoordinates.x, viewCoordinates.y);
-		ctx.strokeText('X', viewCoordinates.x, viewCoordinates.y);
+		ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
 	}
+  else {
+    ctx.font = '48px serif';
+    ctx.fillStyle = ('gray');
+    ctx.strokeStyle = ('gray');
+    ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
+  }
 }
 
-function modelToView(x, y) {
-	return {
-		x: x * blockWidth,
-		y: y * blockHeight
+
+function render() {
+	for (var x = 0; x < ROWS; x++) {
+		for (var y = 0; y < COLS; y++) {
+			renderBlock(x, y);
+		}
 	}
 }
 
