@@ -13,6 +13,9 @@ var BLOCK_FLAGGED = 2;
 
 var playing = true;
 
+// https://www.youtube.com/watch?v=LRnnNInjmN0
+// 32:19
+
 function init() {
 	for (var x = 0; x < ROWS; x++) {
 		board[x] = [];
