@@ -31,13 +31,13 @@ function renderBlock(x, y) {
 	ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
 	if (boardStatus[x][y] === BLOCK_OPENED) {
-		ctx.font = '48px serif';
+		ctx.font = '30px Arial';
 		ctx.fillStyle = ('black');
 		ctx.strokeStyle = ('black');
 		ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
 	}
   else {
-    ctx.font = '48px serif';
+    ctx.font = '30px Arial';
     ctx.fillStyle = ('gray');
     ctx.strokeStyle = ('gray');
     ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);

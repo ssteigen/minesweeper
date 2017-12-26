@@ -105,7 +105,23 @@ function openBlock(x, y) {
         playing = false;
         // revealBoard();
     }
+
     boardStatus[x][y] = BLOCK_OPENED;
+    if (board[x][y] == 0) {
+        // Flood fill.
+        for (var dx = -1; dx <= 1; dx++) {
+            for (var dy = -1; dy <= 1; dy++) {
+                var xx = x + dx;
+                var yy = y + dy;
+
+                if (inBounds(xx, yy)) {
+                    if (boardStatus[xx][yy] != BLOCK_OPENED) {
+                        openBlock(xx, yy);
+                    }
+                }
+            }
+        }
+    }
 }
 
 init();
