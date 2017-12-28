@@ -74,8 +74,21 @@ function placeMines(board, numMines) {
   return board;
 }
 
+function flagBlock(x, y) {
+  if (!playing || boardStatus[x][y] == BLOCK_OPENED) {
+    return;
+  }
+
+  if (boardStatus[x][y] !== BLOCK_FLAGGED) {
+    boardStatus[x][y] = BLOCK_FLAGGED;
+  }
+  else {
+    boardStatus[x][y] = BLOCK_CLOSED
+  }
+}
+
 function openBlock(x, y) {
-  if (!playing) {
+  if (!playing || boardStatus[x][y] === BLOCK_FLAGGED) {
     return;
   }
 

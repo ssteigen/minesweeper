@@ -9,6 +9,12 @@ var ctx = canvas.getContext('2d');
 
 var colors = ['blue', 'green', 'red', 'navyblue', 'darkred', 'cyan', 'purple', 'black'];
 
+var mineIcon = new Image();
+mineIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/solid/bomb.svg';
+
+var flagIcon = new Image();
+flagIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/solid/flag.svg';
+
 function modelToView(x, y) {
   return {
     x: x * blockWidth,
@@ -37,27 +43,55 @@ function renderBlock(x, y) {
   ctx.fillRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
   ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
-  ctx.font = '20px Verdana';
-
-  // For debugging purposes.
-  ctx.fillStyle = ('gray');
-  ctx.strokeStyle = ('gray');
-
   if (boardStatus[x][y] === BLOCK_OPENED) {
-    ctx.fillStyle = (colors[board[x][y] - 1]);
+    ctx.fillStyle = colors[board[x][y] - 1];
+
+    switch (board[x][y]) {
+      case 0:
+        break;
+      case BLOCK_MINE:
+        renderMine(x, y);
+        break;
+      default:
+        renderNumber(x, y);
+        break;
+    }
   }
 
-  if (board[x][y] !== 0 ) {
-    var textSizeM = ctx.measureText('M');
-    var textSizeNum = ctx.measureText(board[x][y]);
-    ctx.fillText(
-      board[x][y],
-      viewCoordinates.x + Math.floor(blockWidth / 2) - textSizeNum.width / 2,
-      viewCoordinates.y + Math.floor(blockHeight / 2) + textSizeM.width / 2
-    );
+  if (boardStatus[x][y] == BLOCK_FLAGGED) {
+    renderFlag(x, y);
   }
 }
 
+function clearBlock(x, y) {
+  var viewCoordinates = modelToView(x, y); 
+  ctx.clearRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+}
+
+function renderNumber(x, y) {
+  var viewCoordinates = modelToView(x, y);
+
+  ctx.font = '20px Verdana';
+//  ctx.fillStyle = colors[board[x][y] - 1];
+  var textSizeM = ctx.measureText('M');
+  var textSizeNum = ctx.measureText(board[x][y]);
+ 
+  ctx.fillText(
+    board[x][y],
+    viewCoordinates.x + Math.floor(blockWidth / 2) - textSizeNum.width / 2,
+    viewCoordinates.y + Math.floor(blockHeight / 2) + textSizeM.width / 2
+  );
+}
+
+function renderFlag(x, y) {
+  var viewCoordinates = modelToView(x, y);
+  ctx.drawImage(flagIcon, viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+}
+
+function renderMine(x, y) {
+  var viewCoordinates = modelToView(x, y);
+  ctx.drawImage(mineIcon, viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+}
 
 function render() {
   for (var x = 0; x < ROWS; x++) {
