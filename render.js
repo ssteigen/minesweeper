@@ -31,6 +31,7 @@ function renderBlock(x, y) {
 	ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
   ctx.font = '30px Arial';
+
   // For debugging purposes.
   ctx.fillStyle = ('gray');
   ctx.strokeStyle = ('gray');
@@ -40,7 +41,12 @@ function renderBlock(x, y) {
     ctx.strokeStyle = ('black');
   }
   
-  ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
+  var textSize = ctx.measureText('M');
+  ctx.fillText(
+    board[x][y],
+    viewCoordinates.x + Math.floor(blockWidth / 2) - textSize.width / 2,
+    viewCoordinates.y + Math.floor(blockHeight / 2) + textSize.width / 2
+  );
 }
 
 
