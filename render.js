@@ -10,7 +10,7 @@ var ctx = canvas.getContext('2d');
 var colors = ['blue', 'green', 'red', 'navyblue', 'darkred', 'cyan', 'purple', 'black'];
 
 var mineIcon = new Image();
-mineIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/solid/bomb.svg';
+mineIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/regular/bug.svg';
 
 var flagIcon = new Image();
 flagIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/solid/flag.svg';
@@ -85,12 +85,24 @@ function renderNumber(x, y) {
 
 function renderFlag(x, y) {
   var viewCoordinates = modelToView(x, y);
-  ctx.drawImage(flagIcon, viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+  ctx.drawImage(
+    flagIcon,
+    viewCoordinates.x + blockWidth / 4,
+    viewCoordinates.y + blockHeight / 4,
+    blockWidth / 2,
+    blockHeight / 2
+  );
 }
 
 function renderMine(x, y) {
   var viewCoordinates = modelToView(x, y);
-  ctx.drawImage(mineIcon, viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+  ctx.drawImage(
+    mineIcon,
+    viewCoordinates.x + blockWidth / 4,
+    viewCoordinates.y + blockHeight / 4,
+    blockWidth / 2,
+    blockHeight / 2
+  );
 }
 
 function render() {

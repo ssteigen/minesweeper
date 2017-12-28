@@ -114,6 +114,26 @@ function openBlock(x, y) {
       }
     }
   }
+
+  if (checkVictory()) {
+    alert('You win!');
+    playing = false;
+    revealBoard();
+  }
+}
+
+function checkVictory() {
+  for (var x = 0; x < COLS; x++) {
+    for (var y = 0; y < ROWS; y++) {
+      if (board[x][y] !== BLOCK_MINE && boardStatus[x][y] !== BLOCK_OPENED) {
+        return false;
+      }
+    }
+  }
+  
+  if (playing) {
+    return true;
+  }
 }
 
 function revealBoard() {
