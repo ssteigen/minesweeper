@@ -7,6 +7,7 @@ var blockHeight = H / ROWS;
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
+var colors = ['blue', 'green', 'red', 'navyblue', 'darkred', 'cyan', 'purple', 'black'];
 
 function modelToView(x, y) {
   return {
@@ -43,8 +44,7 @@ function renderBlock(x, y) {
   ctx.strokeStyle = ('gray');
 
   if (boardStatus[x][y] === BLOCK_OPENED) {
-    ctx.fillStyle = ('black');
-    ctx.strokeStyle = ('black');
+    ctx.fillStyle = (colors[board[x][y] - 1]);
   }
 
   if (board[x][y] !== 0 ) {
