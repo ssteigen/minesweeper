@@ -1,10 +1,10 @@
 canvas.addEventListener('click', function(e) {
-    var x = e.clientX - canvas.offsetLeft;
-    var y = e.clientY - canvas.offsetTop;
+  var x = e.clientX - canvas.offsetLeft;
+  var y = e.clientY - canvas.offsetTop;
 
-    // hit test
-    var modelCoordinates = viewToModel(x, y);
+  // hit test
+  var modelCoordinates = viewToModel(x, y);
 
-    openBlock(modelCoordinates.x, modelCoordinates.y);
-    render();
+  openBlock(modelCoordinates.x, modelCoordinates.y);
+  render();
 });

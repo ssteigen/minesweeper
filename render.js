@@ -9,26 +9,26 @@ var ctx = canvas.getContext('2d');
 
 
 function modelToView(x, y) {
-	return {
-		x: x * blockWidth,
-		y: y * blockHeight
-	}
+  return {
+    x: x * blockWidth,
+    y: y * blockHeight
+  }
 }
 
 function viewToModel(x, y) {
-    return {
-        x: Math.floor(x / blockWidth),
-        y: Math.floor(y / blockHeight)
-    };
+  return {
+    x: Math.floor(x / blockWidth),
+    y: Math.floor(y / blockHeight)
+  };
 }
 
 function renderBlock(x, y) {
-	var viewCoordinates = modelToView(x, y);
+  var viewCoordinates = modelToView(x, y);
 
-	ctx.fillStyle = ('#aaa');
-	ctx.strokeStyle = ('black');
-	ctx.fillRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
-	ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+  ctx.fillStyle = ('#aaa');
+  ctx.strokeStyle = ('black');
+  ctx.fillRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
+  ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
   ctx.font = '30px Arial';
 
@@ -40,7 +40,7 @@ function renderBlock(x, y) {
     ctx.fillStyle = ('black');
     ctx.strokeStyle = ('black');
   }
-  
+
   var textSize = ctx.measureText('M');
   ctx.fillText(
     board[x][y],
@@ -51,11 +51,11 @@ function renderBlock(x, y) {
 
 
 function render() {
-	for (var x = 0; x < ROWS; x++) {
-		for (var y = 0; y < COLS; y++) {
-			renderBlock(x, y);
-		}
-	}
+  for (var x = 0; x < ROWS; x++) {
+    for (var y = 0; y < COLS; y++) {
+      renderBlock(x, y);
+    }
+  }
 }
 
 render();
