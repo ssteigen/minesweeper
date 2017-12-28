@@ -95,7 +95,7 @@ function openBlock(x, y) {
   if (board[x][y] == BLOCK_MINE) {
     alert('Game over!');
     playing = false;
-    // revealBoard();
+    revealBoard();
   }
 
   boardStatus[x][y] = BLOCK_OPENED;
@@ -112,6 +112,14 @@ function openBlock(x, y) {
           }
         }
       }
+    }
+  }
+}
+
+function revealBoard() {
+  for (var x = 0; x < COLS; x++) {
+    for (var y = 0; y < ROWS; y++) {
+      boardStatus[x][y] = BLOCK_OPENED;
     }
   }
 }
