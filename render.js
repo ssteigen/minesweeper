@@ -30,18 +30,17 @@ function renderBlock(x, y) {
 	ctx.fillRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 	ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
-	if (boardStatus[x][y] === BLOCK_OPENED) {
-		ctx.font = '30px Arial';
-		ctx.fillStyle = ('black');
-		ctx.strokeStyle = ('black');
-		ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
-	}
-  else {
-    ctx.font = '30px Arial';
-    ctx.fillStyle = ('gray');
-    ctx.strokeStyle = ('gray');
-    ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
+  ctx.font = '30px Arial';
+  // For debugging purposes.
+  ctx.fillStyle = ('gray');
+  ctx.strokeStyle = ('gray');
+
+  if (boardStatus[x][y] === BLOCK_OPENED) {
+    ctx.fillStyle = ('black');
+    ctx.strokeStyle = ('black');
   }
+  
+  ctx.fillText(board[x][y], viewCoordinates.x, viewCoordinates.y + blockHeight);
 }
 
 
