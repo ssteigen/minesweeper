@@ -13,7 +13,24 @@ var mineIcon = new Image();
 mineIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/regular/bug.svg';
 
 var flagIcon = new Image();
-flagIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/solid/flag.svg';
+flagIcon.src = 'fontawesome-pro-5.0.2/advanced-options/raw-svg/regular/flag.svg';
+
+var colors2 = [
+  '#2980b9', // blue
+  '#27ae60', // green
+  '#c0392b', // red
+  '#d35400', // orange
+  '#16a085', // bluegreen
+  '#f39c12', // yellow
+  '#8e44ad', // purple
+  '#34495e' // darkblue
+];
+
+// f6f4f7
+// 7f8582
+// 8cabc3
+// 886f87
+// 288089
 
 function modelToView(x, y) {
   return {
@@ -33,18 +50,19 @@ function renderBlock(x, y) {
   var viewCoordinates = modelToView(x, y);
 
   if (boardStatus[x][y] == BLOCK_OPENED) {
-    ctx.fillStyle = '#ddd';
+    ctx.fillStyle = '#ecf0f1';
   }
   else {
-    ctx.fillStyle = '#999';
+    ctx.fillStyle = '#bdc3c7';
   }
   
-  ctx.strokeStyle = ('black');
+  ctx.strokeStyle = '#95a5a6';
+  ctx.lineWidth = 3;
   ctx.fillRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
   ctx.strokeRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
 
   if (boardStatus[x][y] === BLOCK_OPENED) {
-    ctx.fillStyle = colors[board[x][y] - 1];
+    ctx.fillStyle = colors2[board[x][y] - 1];
 
     switch (board[x][y]) {
       case 0:
@@ -63,16 +81,10 @@ function renderBlock(x, y) {
   }
 }
 
-function clearBlock(x, y) {
-  var viewCoordinates = modelToView(x, y); 
-  ctx.clearRect(viewCoordinates.x, viewCoordinates.y, blockWidth, blockHeight);
-}
-
 function renderNumber(x, y) {
   var viewCoordinates = modelToView(x, y);
 
-  ctx.font = '20px Verdana';
-//  ctx.fillStyle = colors[board[x][y] - 1];
+  ctx.font = '20px Space Mono';
   var textSizeM = ctx.measureText('M');
   var textSizeNum = ctx.measureText(board[x][y]);
  
